@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th=http://www.thymeleaf.org>
+<head th:replace="common/head">
+    <title></title>
+</head>
+<body>
+<div class="loading">
+    <div class="spinner"></div>
+</div>
+<div class="header">
+    <div class="logo"></div>
+    <div class="user">
+        <img th:src="@{${user.photo == null or user.photo == ''}} ? @{/common/images/default_headportrait.png} : ${user.photo}"
+             alt="" class="avatar"><span class="name" th:text="${user.loginName}"></span>
+    </div>
+    <div class="user-panel">
+        <a th:href="@{/operator/toSelf}" class="panel-item item1">账号设置</a>
+        <a th:href="@{/log/list} +'?logType=0&createByEq='+${user.operatorId}" class="panel-item item1">登录日志</a>
+        <a th:href="@{/logout}" class="panel-item">退出登录</a>
+    </div>
+</div>
+<div class="main clearfix">
+    <ul class="side-menu">
+        <li th:each="menu,menuStat : ${menus}" th:class="${menuStat.count == 1} ? 'menu-item selected' : 'menu-item'">
+            <a th:href="@{${menu.menuUrl}}"><i th:class="${menu.menuIcon}"></i><span class="items"
+                                                                                     th:text="${menu.menuName}"></span></a>
+        </li>
+    </ul>
+    <iframe th:src="@{/mainPage}" class="content" onload="isLoading()" id="content"></iframe>
+</div>
+</body>
+<script>
+    $(function () {
+        $('.user').on('mouseover', function () {
+            $('.user-panel').addClass('show')
+        });
+        $('.user-panel').on('mouseleave', function () {
+            $(this).removeClass('show')
+        });
+
+        $('.side-menu .menu-item ').click(function (event) {
+            $(this).addClass('selected').siblings().removeClass('selected')
+        });
+
+        $('.side-menu .menu-item a').click(function (event) {
+            event.preventDefault(); //勿删
+            var $link = $(this).prop('href');
+            $(".loading").show();
+            $('#content').attr('src', $link);
+
+        });
+        $(".user-panel .item1").click(function (event) {
+            event.preventDefault(); //勿删
+            var that = $(this)
+            var $link = $(this).prop('href');
+            $(".loading").show();
+            $('#content').attr('src', $link);
+        })
+    })
+
+    function isLoading() {
+        $(".loading").hide();
+    }
+</script>
+</html>

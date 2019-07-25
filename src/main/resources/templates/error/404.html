@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th=http://www.thymeleaf.org xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head th:replace="common/head">
+    <title>404</title>
+</head>
+<body>
+<div class="contents">
+    <div class="error">
+        <img th:src="@{/common/images/404.png}" alt="">
+        <p>哎呀妈呀~页面找不到了...</p>
+        <span class="goBack" th:onclick="'goback()'">返回上一级</span>
+    </div>
+</div>
+</body>
+<script>
+    function goback() {
+        window.location.href = 'javascript:history.go(-1)';
+    }
+</script>
+</html>
