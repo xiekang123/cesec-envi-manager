@@ -20,7 +20,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("sys_menu")
-public class Menu extends BaseEntity {
+public class MenuEntity extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /**

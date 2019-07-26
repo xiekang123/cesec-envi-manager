@@ -2,8 +2,8 @@ package cc.envi;
 
 import cc.envi.common.service.RedisService;
 import cc.envi.system.dao.RoleMapper;
-import cc.envi.system.entity.Role;
-import cc.envi.system.entity.User;
+import cc.envi.system.entity.RoleEntity;
+import cc.envi.system.entity.UserEntity;
 import cc.envi.system.service.UserService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.junit.Test;
@@ -30,15 +30,15 @@ public class CesecEnviManagerApplicationTests {
 	@Test
 	public void contextLoads() {
         // 通过用户名到数据库查询用户信息
-        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq(true,"user_name","xiekang");
-        User user = this.userService.getOne(queryWrapper);
+        UserEntity user = this.userService.getOne(queryWrapper);
         System.out.println(user);
     }
 
     @Test
     public void testLink(){
-        List<Role> roleList = roleMapper.findUserRole("admin");
+        List<RoleEntity> roleList = roleMapper.findUserRole("admin");
         System.out.println(roleList);
     }
 

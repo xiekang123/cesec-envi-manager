@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @TableName("sys_user")
 @AllArgsConstructor
 @NoArgsConstructor
-public class User extends BaseEntity {
+public class UserEntity extends BaseEntity {
     private static final long serialVersionUID = 1L;
     public static final String STATUS_LOCK = "0";
 

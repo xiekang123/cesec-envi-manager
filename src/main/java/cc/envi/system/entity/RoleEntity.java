@@ -20,7 +20,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("sys_role")
-public class Role extends BaseEntity {
+public class RoleEntity extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /**

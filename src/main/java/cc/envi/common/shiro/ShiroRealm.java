@@ -1,14 +1,12 @@
 package cc.envi.common.shiro;
 
-import cc.envi.system.entity.Menu;
-import cc.envi.system.entity.Role;
-import cc.envi.system.entity.User;
+import cc.envi.system.entity.MenuEntity;
+import cc.envi.system.entity.RoleEntity;
+import cc.envi.system.entity.UserEntity;
 import cc.envi.system.service.MenuService;
 import cc.envi.system.service.RoleService;
 import cc.envi.system.service.UserService;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.segments.MergeSegments;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -32,16 +30,16 @@ public class ShiroRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        User user = (User) SecurityUtils.getSubject().getPrincipal();
+        UserEntity user = (UserEntity) SecurityUtils.getSubject().getPrincipal();
         String userName = user.getUserName();
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         // 获取用户角色集
-        List<Role> roleList = roleService.findUserRole(userName);
-        Set<String> roleSet = roleList.stream().map(Role::getRoleName).collect(Collectors.toSet());
+        List<RoleEntity> roleList = roleService.findUserRole(userName);
+        Set<String> roleSet = roleList.stream().map(RoleEntity::getRoleName).collect(Collectors.toSet());
         simpleAuthorizationInfo.setRoles(roleSet);
         // 获取用户权限集
-        List<Menu> permissionList = this.menuService.findUserPermissions(userName);
-        Set<String> permissionSet = permissionList.stream().map(Menu::getPerms).collect(Collectors.toSet());
+        List<MenuEntity> permissionList = this.menuService.findUserPermissions(userName);
+        Set<String> permissionSet = permissionList.stream().map(MenuEntity::getPerms).collect(Collectors.toSet());
         simpleAuthorizationInfo.setStringPermissions(permissionSet);
         return simpleAuthorizationInfo;
     }
@@ -59,14 +57,14 @@ public class ShiroRealm extends AuthorizingRealm {
         String userName = (String) authenticationToken.getPrincipal();
         String password = new String((char[]) authenticationToken.getCredentials());
         // 通过用户名到数据库查询用户信息
-        QueryWrapper<User>  queryWrapper = new QueryWrapper<>();
+        QueryWrapper<UserEntity>  queryWrapper = new QueryWrapper<>();
         queryWrapper.eq(true,"user_name",userName);
-        User user = this.userService.getOne(queryWrapper);
+        UserEntity user = this.userService.getOne(queryWrapper);
         if (user == null)
             throw new UnknownAccountException("用户名或密码错误！");
         if (!password.equals(user.getUserPwd()))
             throw new IncorrectCredentialsException("用户名或密码错误！");
-        if (User.STATUS_LOCK.equals(user.getStatus()))
+        if (UserEntity.STATUS_LOCK.equals(user.getStatus()))
             throw new LockedAccountException("账号已被锁定,请联系管理员！");
         return new SimpleAuthenticationInfo(user, password, getName());
     }
