@@ -22,7 +22,7 @@ public class TaskEntityController {
     @RequestMapping("task/list")
     @RequiresPermissions("task:list")
     @ResponseBody
-    public Map<String, Object> TaskEntityList( TaskEntity taskEntity) {
+    public Map<String, Object> taskEntityList( TaskEntity taskEntity) {
         //return super.selectByPageNumSize(request, () -> this.TaskEntityService.findAllTaskEntitys(TaskEntity));
         return null;
     }
@@ -133,32 +133,6 @@ public class TaskEntityController {
         } catch (Exception e) {
             log.error("恢复任务失败", e);
             return ResponseBo.error("恢复任务失败，请联系网站管理员！");
-        }*/
-        return null;
-    }
-
-    @RequestMapping("task/excel")
-    @ResponseBody
-    public ResponseBo TaskEntityExcel(TaskEntity taskEntity) {
-        /*try {
-            List<TaskEntity> list = this.TaskEntityService.findAllTaskEntitys(TaskEntity);
-            return FileUtil.createExcelByPOIKit("任务表", list, TaskEntity.class);
-        } catch (Exception e) {
-            log.error("导出任务信息Excel失败", e);
-            return ResponseBo.error("导出Excel失败，请联系网站管理员！");
-        }*/
-        return null;
-    }
-
-    @RequestMapping("task/csv")
-    @ResponseBody
-    public ResponseBo TaskEntityCsv(TaskEntity taskEntity) {
-        /*try {
-            List<TaskEntity> list = this.TaskEntityService.findAllTaskEntitys(TaskEntity);
-            return FileUtil.createCsv("任务表", list, TaskEntity.class);
-        } catch (Exception e) {
-            log.error("导出任务信息Csv失败", e);
-            return ResponseBo.error("导出Csv失败，请联系网站管理员！");
         }*/
         return null;
     }
