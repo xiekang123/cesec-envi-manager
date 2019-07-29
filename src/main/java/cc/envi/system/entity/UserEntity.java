@@ -25,7 +25,7 @@ public class UserEntity extends BaseEntity {
      * 编号
      */
     @TableId(type = IdType.AUTO)
-    private Integer userId;
+    private Long userId;
 
     /**
      * 真实名称

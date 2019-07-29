@@ -3,6 +3,7 @@ package cc.envi.quartz.entity;
 import cc.envi.common.entity.BaseEntity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,6 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @TableName("sys_task")
 public class TaskEntity extends BaseEntity{
+
     /**
      * 任务调度参数key
      */
@@ -35,6 +37,11 @@ public class TaskEntity extends BaseEntity{
     private String methodName;
 
     /**
+     * 任务分组
+     */
+    private String groupName;
+
+    /**
      * 参数
      */
     private String params;
@@ -47,7 +54,7 @@ public class TaskEntity extends BaseEntity{
     /**
      * 任务状态 0：正常 1：暂停
      */
-    private String status;
+    private Integer status;
 
     /**
      * 备注
@@ -57,25 +64,26 @@ public class TaskEntity extends BaseEntity{
     /**
      * 删除标识（0：正常；1：删除）
      */
+    @TableLogic(value = "0",delval = "1")
     private Integer delFlag;
 
     public enum ScheduleStatus {
         /**
          * 正常
          */
-        NORMAL("0"),
+        NORMAL(0),
         /**
          * 暂停
          */
-        PAUSE("1");
+        PAUSE(1);
 
-        private String value;
+        private Integer value;
 
-        private ScheduleStatus(String value) {
+        private ScheduleStatus(Integer value) {
             this.value = value;
         }
 
-        public String getValue() {
+        public Integer getValue() {
             return value;
         }
     }

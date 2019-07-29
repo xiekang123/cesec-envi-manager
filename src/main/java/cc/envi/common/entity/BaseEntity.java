@@ -6,23 +6,25 @@ import java.io.Serializable;
 import java.util.Date;
 @Data
 public class BaseEntity implements Serializable {
+
+    private static final long serialVersionUID = 1088596452642571601L;
     /**
      * 创建人
      */
-    private Long createBy;
+    protected Long createBy;
 
     /**
      * 创建时间
      */
-    private Date createTime;
+    protected Date createTime;
 
     /**
      * 修改人
      */
-    private Long updateBy;
+    protected Long updateBy;
 
     /**
      * 修改时间
      */
-    private Date updateTime;
+    protected Date updateTime;
 }

@@ -1,4 +1,4 @@
-package cc.envi.quartz.util;
+package cc.envi.quartz.common;
 
 import cc.envi.common.utils.SpringContextUtil;
 import org.apache.commons.lang3.StringUtils;

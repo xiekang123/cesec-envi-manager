@@ -37,7 +37,7 @@
         where u.username = #{userName}) order by m.create_time
   </select>
   
-   <update id="changeToTop" parameterType="java.util.List">
+   <update id="changeToTop" parameterType="java.common.List">
   	update t_menu set parent_id = 0 where menu_id in ( select a.menu_id from (
   	(select menu_id from t_menu where parent_id in 
   	<foreach collection="list" item="menuId" index="index" open="(" close=")" separator=",">

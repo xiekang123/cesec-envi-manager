@@ -1,4 +1,4 @@
-package cc.envi.quartz.util;
+package cc.envi.quartz.common;
 
 import cc.envi.quartz.entity.TaskEntity;
 import org.quartz.JobExecutionContext;
@@ -13,7 +13,7 @@ import java.util.concurrent.Future;
 /**
  * 定时任务
  *
- * @author MrBird
+ * @author xiekang
  */
 public class ScheduleJob extends QuartzJobBean {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
