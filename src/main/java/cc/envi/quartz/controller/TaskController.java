@@ -7,6 +7,7 @@ import cc.envi.quartz.entity.TaskEntity;
 import cc.envi.quartz.service.TaskService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.checkerframework.checker.units.qual.A;
 import org.quartz.CronExpression;
@@ -14,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -34,11 +36,13 @@ public class TaskController extends BaseController{
         return "job/job";
     }
 
-    @RequestMapping("task/list")
+    @ApiOperation(value = "任务列表")
+    @PostMapping("task/list")
     @RequiresPermissions("task:list")
     @ResponseBody
     public IPage<TaskEntity> taskEntityList(QueryRequest queryRequest) {
-        Page<TaskEntity> page = new Page<>(queryRequest.getPageNum(),queryRequest.getPageSize());
+        Page<TaskEntity> page = new Page<>(queryRequest.getPageNum()==0?1:queryRequest.getPageNum()
+                ,queryRequest.getPageSize()==0?10:queryRequest.getPageSize());
         IPage<TaskEntity> taskEntityIPage = taskService.page(page);
         return taskEntityIPage;
     }
@@ -54,8 +58,9 @@ public class TaskController extends BaseController{
     }
 
     @RequiresPermissions("task:add")
-    @RequestMapping("task/add")
+    @PostMapping("task/add")
     @ResponseBody
+    @ApiOperation(value = "任务新增")
     public ResponseBo addTaskEntity(TaskEntity taskEntity) {
         try {
             taskEntity.setCreateBy(getCurrentUser().getUserId());
@@ -68,8 +73,9 @@ public class TaskController extends BaseController{
     }
 
     @RequiresPermissions("task:delete")
-    @RequestMapping("task/delete")
+    @PostMapping("task/delete")
     @ResponseBody
+    @ApiOperation(value = "任务删除")
     public ResponseBo deleteTaskEntity(TaskEntity taskEntity) {
         try {
 
@@ -83,6 +89,7 @@ public class TaskController extends BaseController{
 
     @RequestMapping("task/getTask")
     @ResponseBody
+    @ApiOperation(value = "任务查找")
     public ResponseBo getTaskEntityById(Long taskEntityId) {
         try {
             TaskEntity TaskEntity = taskService.getById(taskEntityId);
@@ -94,8 +101,9 @@ public class TaskController extends BaseController{
     }
 
     @RequiresPermissions("task:update")
-    @RequestMapping("task/update")
+    @PostMapping("task/update")
     @ResponseBody
+    @ApiOperation(value = "任务更新")
     public ResponseBo updateTaskEntity(TaskEntity taskEntity) {
         try {
             taskEntity.setUpdateBy(getCurrentUser().getUserId());
@@ -110,6 +118,7 @@ public class TaskController extends BaseController{
     @RequiresPermissions("task:run")
     @RequestMapping("task/run")
     @ResponseBody
+    @ApiOperation(value = "任务运行")
     public ResponseBo runTaskEntity(String taskId) {
         try {
             taskService.run(taskId);
@@ -123,6 +132,7 @@ public class TaskController extends BaseController{
     @RequiresPermissions("task:pause")
     @RequestMapping("task/pause")
     @ResponseBody
+    @ApiOperation(value = "任务暂停")
     public ResponseBo pauseTaskEntity(String taskId) {
         try {
             taskService.pause(taskId);
@@ -136,6 +146,7 @@ public class TaskController extends BaseController{
     @RequiresPermissions("task:resume")
     @RequestMapping("task/resume")
     @ResponseBody
+    @ApiOperation(value = "任务恢复")
     public ResponseBo resumeTaskEntity(String taskId) {
         try {
             taskService.resume(taskId);
