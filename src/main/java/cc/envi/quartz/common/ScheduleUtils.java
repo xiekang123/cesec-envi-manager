@@ -1,45 +1,58 @@
 package cc.envi.quartz.common;
 
-import cc.envi.quartz.entity.TaskEntity;
+import cc.envi.common.constant.SystemConstant;
+import cc.envi.common.utils.SpringContextUtil;
+import cc.envi.quartz.service.IJobService;
+import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import cc.envi.quartz.entity.Job;
 
 /**
  * 定时任务工具类
  *
- * @author MrBird
+ * @author xiekang
  */
+@Slf4j
 public class ScheduleUtils {
 
-    private static Logger log = LoggerFactory.getLogger(ScheduleUtils.class);
+    private static IJobService jobService;
 
-    protected ScheduleUtils() {
-
+    static {
+        if(jobService == null ){
+            jobService = (IJobService)SpringContextUtil.getBean("JobService");
+        }
     }
 
-    private static final String JOB_NAME = "TASK_";
+    protected ScheduleUtils() {
+    }
+
+    private static final String JOB_NAME_PREFIX = "TASK_";
 
     /**
-     * 获取触发器key
+     * 获取触发器 key
      */
     private static TriggerKey getTriggerKey(Long jobId,String groupName) {
-        return TriggerKey.triggerKey(JOB_NAME + jobId,groupName);
+        return TriggerKey.triggerKey(JOB_NAME_PREFIX + jobId,groupName);
     }
 
     /**
      * 获取jobKey
      */
     private static JobKey getJobKey(Long jobId,String groupName) {
-        return JobKey.jobKey(JOB_NAME + jobId,groupName);
+        return JobKey.jobKey(JOB_NAME_PREFIX + jobId,groupName);
     }
+
 
     /**
      * 获取表达式触发器
      */
-    public static CronTrigger getCronTrigger(Scheduler scheduler, Long jobId,String groupName) {
+    public static CronTrigger getCronTrigger(Scheduler scheduler, Long jobId) {
         try {
-            return (CronTrigger) scheduler.getTrigger(getTriggerKey(jobId,groupName));
+            Job job = jobService.findJob(jobId);
+            if(job != null ){
+                return (CronTrigger) scheduler.getTrigger(getTriggerKey(jobId,job.getGroupName()));
+            }
+            return null;
         } catch (SchedulerException e) {
             log.error("获取Cron表达式失败", e);
         }
@@ -49,11 +62,11 @@ public class ScheduleUtils {
     /**
      * 创建定时任务
      */
-    public static void createScheduleJob(Scheduler scheduler, TaskEntity scheduleJob) {
+    public static void createScheduleJob(Scheduler scheduler, Job scheduleJob) {
         try {
             // 构建job信息
             JobDetail jobDetail = JobBuilder.newJob(ScheduleJob.class)
-                    .withIdentity(getJobKey(scheduleJob.getTaskId(),scheduleJob.getGroupName()))
+                    .withIdentity(getJobKey(scheduleJob.getJobId(),scheduleJob.getGroupName()))
                     .build();
 
             // 表达式调度构建器
@@ -61,18 +74,17 @@ public class ScheduleUtils {
                     .withMisfireHandlingInstructionDoNothing();
 
             // 按新的cronExpression表达式构建一个新的trigger
-            CronTrigger trigger = TriggerBuilder.newTrigger()
-                    .withIdentity(getTriggerKey(scheduleJob.getTaskId(),scheduleJob.getGroupName()))
+            CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity(getTriggerKey(scheduleJob.getJobId(),scheduleJob.getGroupName()))
                     .withSchedule(scheduleBuilder).build();
 
             // 放入参数，运行时的方法可以获取
-            jobDetail.getJobDataMap().put(TaskEntity.JOB_PARAM_KEY, scheduleJob);
+            jobDetail.getJobDataMap().put(Job.JOB_PARAM_KEY, scheduleJob);
 
             scheduler.scheduleJob(jobDetail, trigger);
 
             // 暂停任务
-            if (scheduleJob.getStatus().equals(TaskEntity.ScheduleStatus.PAUSE.getValue())) {
-                pauseJob(scheduler, scheduleJob.getTaskId(),scheduleJob.getGroupName());
+            if (scheduleJob.getStatus().equals(SystemConstant.ScheduleStatus.PAUSE.getValue())) {
+                pauseJob(scheduler, scheduleJob.getJobId());
             }
         } catch (SchedulerException e) {
             log.error("创建定时任务失败", e);
@@ -82,30 +94,30 @@ public class ScheduleUtils {
     /**
      * 更新定时任务
      */
-    public static void updateScheduleJob(Scheduler scheduler, TaskEntity scheduleJob) {
+    public static void updateScheduleJob(Scheduler scheduler, Job scheduleJob) {
         try {
-            TriggerKey triggerKey = getTriggerKey(scheduleJob.getTaskId(),scheduleJob.getGroupName());
+            TriggerKey triggerKey = getTriggerKey(scheduleJob.getJobId(),scheduleJob.getGroupName());
 
             // 表达式调度构建器
             CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(scheduleJob.getCronExpression())
                     .withMisfireHandlingInstructionDoNothing();
 
-            CronTrigger trigger = getCronTrigger(scheduler, scheduleJob.getTaskId(),scheduleJob.getGroupName());
+            CronTrigger trigger = getCronTrigger(scheduler, scheduleJob.getJobId());
 
             if (trigger == null) {
                 throw new SchedulerException("获取Cron表达式失败");
             } else {
-                // 按新的cronExpression表达式重新构建trigger
+                // 按新的 cronExpression表达式重新构建 trigger
                 trigger = trigger.getTriggerBuilder().withIdentity(triggerKey).withSchedule(scheduleBuilder).build();
                 // 参数
-                trigger.getJobDataMap().put(TaskEntity.JOB_PARAM_KEY, scheduleJob);
+                trigger.getJobDataMap().put(Job.JOB_PARAM_KEY, scheduleJob);
             }
 
             scheduler.rescheduleJob(triggerKey, trigger);
 
             // 暂停任务
-            if (scheduleJob.getStatus().equals(TaskEntity.ScheduleStatus.PAUSE.getValue())) {
-                pauseJob(scheduler, scheduleJob.getTaskId(),scheduleJob.getGroupName());
+            if (scheduleJob.getStatus().equals(SystemConstant.ScheduleStatus.PAUSE.getValue())) {
+                pauseJob(scheduler, scheduleJob.getJobId());
             }
 
         } catch (SchedulerException e) {
@@ -116,13 +128,13 @@ public class ScheduleUtils {
     /**
      * 立即执行任务
      */
-    public static void run(Scheduler scheduler, TaskEntity scheduleJob) {
+    public static void run(Scheduler scheduler, Job scheduleJob) {
         try {
             // 参数
             JobDataMap dataMap = new JobDataMap();
-            dataMap.put(TaskEntity.JOB_PARAM_KEY, scheduleJob);
+            dataMap.put(Job.JOB_PARAM_KEY, scheduleJob);
 
-            scheduler.triggerJob(getJobKey(scheduleJob.getTaskId(),scheduleJob.getGroupName()), dataMap);
+            scheduler.triggerJob(getJobKey(scheduleJob.getJobId(),scheduleJob.getGroupName()), dataMap);
         } catch (SchedulerException e) {
             log.error("执行定时任务失败", e);
         }
@@ -131,9 +143,12 @@ public class ScheduleUtils {
     /**
      * 暂停任务
      */
-    public static void pauseJob(Scheduler scheduler, Long jobId,String groupName) {
+    public static void pauseJob(Scheduler scheduler, Long jobId) {
         try {
-            scheduler.pauseJob(getJobKey(jobId,groupName));
+            Job job = jobService.findJob(jobId);
+            if(job != null ){
+                scheduler.pauseJob(getJobKey(jobId,job.getGroupName()));
+            }
         } catch (SchedulerException e) {
             log.error("暂停定时任务失败", e);
         }
@@ -142,9 +157,12 @@ public class ScheduleUtils {
     /**
      * 恢复任务
      */
-    public static void resumeJob(Scheduler scheduler, Long jobId,String groupName) {
+    public static void resumeJob(Scheduler scheduler, Long jobId) {
         try {
-            scheduler.resumeJob(getJobKey(jobId,groupName));
+            Job job = jobService.findJob(jobId);
+            if(job != null ){
+                scheduler.resumeJob(getJobKey(jobId,job.getGroupName()));
+            }
         } catch (SchedulerException e) {
             log.error("恢复定时任务失败", e);
         }
@@ -153,9 +171,12 @@ public class ScheduleUtils {
     /**
      * 删除定时任务
      */
-    public static void deleteScheduleJob(Scheduler scheduler, Long jobId,String groupName) {
+    public static void deleteScheduleJob(Scheduler scheduler, Long jobId) {
         try {
-            scheduler.deleteJob(getJobKey(jobId,groupName));
+            Job job = jobService.findJob(jobId);
+            if(job != null ){
+                scheduler.deleteJob(getJobKey(jobId,job.getGroupName()));
+            }
         } catch (SchedulerException e) {
             log.error("删除定时任务失败", e);
         }

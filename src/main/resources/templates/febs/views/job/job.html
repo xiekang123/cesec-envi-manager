@@ -248,11 +248,12 @@
                 url: ctx + 'job',
                 cols: [[
                     {type: 'checkbox'},
-                    {field: 'jobId', title: '任务ID', width: 80},
+                    /*{field: 'jobId', title: '任务ID', width: 80},*/
                     {field: 'beanName', title: 'Bean名称'},
                     {field: 'methodName', title: '方法名称', maxWidth: 200},
                     {field: 'params', title: '方法参数', maxWidth: 180},
                     {field: 'cronExpression', title: 'cron表达式', maxWidth: 180},
+                    {field: 'groupName', title: '任务分组', maxWidth: 180},
                     {field: 'remark', title: '备注', maxWidth: 200},
                     {field: 'createTime', title: '创建时间', minWidth: 180, sort: true},
                     {title: '状态', templet: '#job-status'},

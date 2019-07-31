@@ -35,6 +35,13 @@
             </div>
         </div>
         <div class="layui-form-item">
+            <label class="layui-form-label febs-form-item-require">分组名称：</label>
+            <div class="layui-input-block">
+                <input type="text" name="groupName" maxlength="100" lay-verify="range"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
             <label class="layui-form-label febs-form-item-require">cron表达式：</label>
             <div class="layui-input-block">
                 <input type="text" name="cronExpression" maxlength="20" lay-verify="range|required|cron"

@@ -3,7 +3,7 @@ package cc.envi.common.constant;
 public interface SystemConstant {
 
 
-    enum SystemStatus{
+    enum JobStatus{
         /**
          * 正常
          */
@@ -15,7 +15,28 @@ public interface SystemConstant {
 
         private String value;
 
-        private SystemStatus(String value) {
+        private JobStatus(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+    }
+
+    enum ScheduleStatus {
+        /**
+         * 正常
+         */
+        NORMAL("0"),
+        /**
+         * 暂停
+         */
+        PAUSE("1");
+
+        private String value;
+
+        ScheduleStatus(String value) {
             this.value = value;
         }
 

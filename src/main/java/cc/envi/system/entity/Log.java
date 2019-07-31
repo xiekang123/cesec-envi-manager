@@ -16,7 +16,7 @@ import java.util.Date;
  * @author MrBird
  */
 @Data
-@TableName("t_log")
+@TableName("sys_log")
 @Excel("系统日志表")
 public class Log implements Serializable {
 
@@ -31,14 +31,14 @@ public class Log implements Serializable {
     /**
      * 操作用户
      */
-    @TableField("USERNAME")
+    @TableField("user_name")
     @ExcelField(value = "操作用户")
     private String username;
 
     /**
      * 操作内容
      */
-    @TableField("OPERATION")
+    @TableField("operation")
     @ExcelField(value = "操作内容")
     private String operation;
 
