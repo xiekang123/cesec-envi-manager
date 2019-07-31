@@ -1,4 +1,4 @@
-package cc.mrbird.febs.common.exception;
+package cc.envi.common.exception;
 
 /**
  * Redis 连接异常

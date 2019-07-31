@@ -1,12 +1,12 @@
-package cc.mrbird.febs.system.controller;
+package cc.envi.system.controller;
 
-import cc.mrbird.febs.common.authentication.ShiroHelper;
-import cc.mrbird.febs.common.controller.BaseController;
-import cc.mrbird.febs.common.entity.FebsConstant;
-import cc.mrbird.febs.common.utils.DateUtil;
-import cc.mrbird.febs.common.utils.FebsUtil;
-import cc.mrbird.febs.system.entity.User;
-import cc.mrbird.febs.system.service.IUserService;
+import cc.envi.common.authentication.ShiroHelper;
+import cc.envi.common.controller.BaseController;
+import cc.envi.common.utils.DateUtil;
+import cc.envi.common.utils.FebsConstant;
+import cc.envi.common.utils.FebsUtil;
+import cc.envi.system.entity.User;
+import cc.envi.system.service.IUserService;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.session.ExpiredSessionException;

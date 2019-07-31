@@ -1,8 +1,8 @@
-package cc.mrbird.febs.common.validator;
+package cc.envi.common.validator;
 
-import cc.mrbird.febs.common.annotation.IsMobile;
-import cc.mrbird.febs.common.entity.RegexpConstant;
-import cc.mrbird.febs.common.utils.FebsUtil;
+import cc.envi.common.annotation.IsMobile;
+import cc.envi.common.entity.RegexpConstant;
+import cc.envi.common.utils.FebsUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.validation.ConstraintValidator;

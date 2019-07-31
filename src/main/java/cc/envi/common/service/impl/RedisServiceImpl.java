@@ -1,5 +1,6 @@
 package cc.envi.common.service.impl;
 
+import cc.envi.common.exception.RedisConnectException;
 import cc.envi.common.service.RedisService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

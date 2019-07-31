@@ -3,7 +3,7 @@ package cc.envi.common.aspect;
 import cc.envi.common.annotation.Limit;
 import cc.envi.common.domain.LimitType;
 import cc.envi.common.exception.LimitAccessException;
-import cc.envi.common.utils.IPUtils;
+import cc.envi.common.utils.IPUtil;
 import com.google.common.collect.ImmutableList;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -62,7 +62,7 @@ public class LimitAspect {
         int limitCount = limitAnnotation.count();
         switch (limitType) {
             case IP:
-                key = IPUtils.getIpAddr(request);
+                key = IPUtil.getIpAddr(request);
                 break;
             case CUSTOMER:
                 key = limitAnnotation.key();

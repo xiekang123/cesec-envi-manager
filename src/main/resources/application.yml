@@ -10,7 +10,7 @@ spring:
       # 数据库访问配置, 使用druid数据源
       type: com.alibaba.druid.pool.DruidDataSource
       driverClassName: com.mysql.jdbc.Driver
-      url: jdbc:mysql://192.168.0.44:3306/demo?useUnicode=true&characterEncoding=utf-8&useSSL=false
+      url: jdbc:mysql://192.168.0.44:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false
       username: root
       password: 123456
       druid:
@@ -55,7 +55,7 @@ spring:
   redis:
     host: 192.168.0.44
     port: 6379
-    database: 2
+    database: 0
     password: 123456
     jedis:
       pool:
@@ -99,7 +99,7 @@ spring:
             threadsInheritContextClassLoaderOfInitializingThread: true #配置是否启动自动加载数据库内的定时任务，默认true
 
 mybatis-plus:
-  mapper-locations: classpath*:mapper/*Mapper.xml
+  mapper-locations: classpath*:mapper/*/*.xml
   type-aliases-package: cc.envi.*.entity  #扫描实体类,配置xml的别名
   configuration:
     map-underscore-to-camel-case: true

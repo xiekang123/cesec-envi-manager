@@ -3,7 +3,7 @@ package cc.envi.quartz.service.impl;
 import cc.envi.common.annotation.CronTag;
 import cc.envi.common.utils.DateUtil;
 import cc.envi.quartz.common.ScheduleUtils;
-import cc.envi.quartz.dao.TaskMapper;
+import cc.envi.quartz.mapper.TaskMapper;
 import cc.envi.quartz.entity.TaskEntity;
 import cc.envi.quartz.service.TaskService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

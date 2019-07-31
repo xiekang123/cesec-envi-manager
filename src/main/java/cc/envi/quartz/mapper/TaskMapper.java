@@ -1,4 +1,4 @@
-package cc.envi.quartz.dao;
+package cc.envi.quartz.mapper;
 
 import cc.envi.quartz.entity.TaskEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;

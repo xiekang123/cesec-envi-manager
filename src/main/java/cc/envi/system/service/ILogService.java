@@ -1,8 +1,8 @@
-package cc.mrbird.febs.monitor.service;
+package cc.envi.system.service;
 
 
-import cc.mrbird.febs.common.entity.QueryRequest;
-import cc.mrbird.febs.monitor.entity.Log;
+import cc.envi.common.domain.QueryRequest;
+import cc.envi.system.entity.Log;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.fasterxml.jackson.core.JsonProcessingException;

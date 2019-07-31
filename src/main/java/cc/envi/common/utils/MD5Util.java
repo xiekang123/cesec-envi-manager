@@ -1,4 +1,4 @@
-package cc.mrbird.febs.common.utils;
+package cc.envi.common.utils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.crypto.hash.SimpleHash;

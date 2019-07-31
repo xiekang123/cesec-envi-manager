@@ -1,14 +1,14 @@
-package cc.mrbird.febs.system.controller;
+package cc.envi.system.controller;
 
 
-import cc.mrbird.febs.common.annotation.Log;
-import cc.mrbird.febs.common.controller.BaseController;
-import cc.mrbird.febs.common.entity.FebsResponse;
-import cc.mrbird.febs.common.entity.MenuTree;
-import cc.mrbird.febs.common.exception.FebsException;
-import cc.mrbird.febs.system.entity.Menu;
-import cc.mrbird.febs.system.entity.User;
-import cc.mrbird.febs.system.service.IMenuService;
+import cc.envi.common.annotation.Log;
+import cc.envi.common.controller.BaseController;
+import cc.envi.common.entity.FebsResponse;
+import cc.envi.common.entity.MenuTree;
+import cc.envi.common.exception.FebsException;
+import cc.envi.system.entity.Menu;
+import cc.envi.system.entity.User;
+import cc.envi.system.service.IMenuService;
 import com.wuwenze.poi.ExcelKit;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

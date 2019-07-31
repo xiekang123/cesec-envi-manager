@@ -1,14 +1,15 @@
-package cc.mrbird.febs.system.mapper;
+package cc.envi.system.mapper;
 
-import cc.mrbird.febs.system.entity.Menu;
-import com.baomidou.mybatisplus.annotation.SqlParser;
+import cc.envi.system.entity.Menu;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * @author MrBird
  */
+@Repository
 public interface MenuMapper extends BaseMapper<Menu> {
     /**
      * 查找用户权限集

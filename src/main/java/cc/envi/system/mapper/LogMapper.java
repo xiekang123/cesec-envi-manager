@@ -1,6 +1,6 @@
-package cc.mrbird.febs.monitor.mapper;
+package cc.envi.system.mapper;
 
-import cc.mrbird.febs.monitor.entity.Log;
+import cc.envi.system.entity.Log;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

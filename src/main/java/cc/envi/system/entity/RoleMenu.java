@@ -1,4 +1,4 @@
-package cc.mrbird.febs.system.entity;
+package cc.envi.system.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @author MrBird
  */
 @Data
-@TableName("t_role_menu")
+@TableName("sys_role_menu")
 public class RoleMenu implements Serializable {
 
     private static final long serialVersionUID = -5200596408874170216L;

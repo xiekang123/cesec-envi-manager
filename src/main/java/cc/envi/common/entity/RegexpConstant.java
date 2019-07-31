@@ -1,4 +1,4 @@
-package cc.mrbird.febs.common.entity;
+package cc.envi.common.entity;
 
 /**
  * 正则常量

@@ -1,7 +1,7 @@
-package cc.mrbird.febs.system.entity;
+package cc.envi.system.entity;
 
-import cc.mrbird.febs.common.annotation.IsMobile;
-import cc.mrbird.febs.common.converter.TimeConverter;
+import cc.envi.common.annotation.IsMobile;
+import cc.envi.common.converter.TimeConverter;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -21,11 +21,11 @@ import java.util.Date;
  * @author MrBird
  */
 @Data
-@TableName("t_user")
+@TableName("sys_user")
 @Excel("用户信息表")
 public class User implements Serializable {
 
-    private static final long serialVersionUID = -4352868070794165001L;
+    private static final long serialVersionUID = 1L;
 
     // 用户状态：有效
     public static final String STATUS_VALID = "1";

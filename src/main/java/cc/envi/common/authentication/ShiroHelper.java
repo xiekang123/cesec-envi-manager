@@ -1,6 +1,6 @@
-package cc.mrbird.febs.common.authentication;
+package cc.envi.common.authentication;
 
-import cc.mrbird.febs.common.annotation.Helper;
+import cc.envi.common.annotation.Helper;
 import org.apache.shiro.authz.AuthorizationInfo;
 
 /**

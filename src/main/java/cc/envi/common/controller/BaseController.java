@@ -1,6 +1,6 @@
-package cc.mrbird.febs.common.controller;
+package cc.envi.common.controller;
 
-import cc.mrbird.febs.system.entity.User;
+import cc.envi.system.entity.User;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationToken;

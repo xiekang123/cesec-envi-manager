@@ -1,7 +1,7 @@
-package cc.mrbird.febs.monitor.mapper;
+package cc.envi.system.mapper;
 
-import cc.mrbird.febs.monitor.entity.LoginLog;
-import cc.mrbird.febs.system.entity.User;
+import cc.envi.system.entity.LoginLog;
+import cc.envi.system.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;

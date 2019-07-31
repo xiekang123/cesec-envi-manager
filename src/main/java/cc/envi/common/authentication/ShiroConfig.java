@@ -1,7 +1,7 @@
-package cc.mrbird.febs.common.authentication;
+package cc.envi.common.authentication;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
-import cc.mrbird.febs.common.properties.FebsProperties;
+import cc.envi.common.properties.FebsProperties;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;

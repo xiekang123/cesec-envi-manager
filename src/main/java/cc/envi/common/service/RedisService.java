@@ -1,4 +1,7 @@
 package cc.envi.common.service;
+
+import cc.envi.common.exception.RedisConnectException;
+
 /**
  * Redis服务接口，只添加了String类型的缓存功能，有特需求自行添加
  * @author xiekang

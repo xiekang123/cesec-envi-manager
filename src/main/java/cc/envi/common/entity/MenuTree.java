@@ -1,6 +1,6 @@
-package cc.mrbird.febs.common.entity;
+package cc.envi.common.entity;
 
-import cc.mrbird.febs.system.entity.Menu;
+import cc.envi.system.entity.Menu;
 import lombok.Data;
 
 import java.io.Serializable;

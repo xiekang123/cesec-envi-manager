@@ -1,15 +1,11 @@
-package cc.mrbird.febs.monitor.service.impl;
+package cc.envi.system.service.impl;
 
-import cc.mrbird.febs.common.entity.FebsConstant;
-import cc.mrbird.febs.common.entity.QueryRequest;
-import cc.mrbird.febs.common.utils.AddressUtil;
-import cc.mrbird.febs.common.utils.HttpContextUtil;
-import cc.mrbird.febs.common.utils.IPUtil;
-import cc.mrbird.febs.common.utils.SortUtil;
-import cc.mrbird.febs.monitor.entity.LoginLog;
-import cc.mrbird.febs.monitor.mapper.LoginLogMapper;
-import cc.mrbird.febs.monitor.service.ILoginLogService;
-import cc.mrbird.febs.system.entity.User;
+import cc.envi.common.domain.QueryRequest;
+import cc.envi.common.utils.*;
+import cc.envi.system.entity.LoginLog;
+import cc.envi.system.entity.User;
+import cc.envi.system.mapper.LoginLogMapper;
+import cc.envi.system.service.ILoginLogService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -55,7 +51,7 @@ public class LoginLogServiceImpl extends ServiceImpl<LoginLogMapper, LoginLog> i
     @Transactional
     public void saveLoginLog(LoginLog loginLog) {
         loginLog.setLoginTime(new Date());
-        HttpServletRequest request = HttpContextUtil.getHttpServletRequest();
+        HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
         String ip = IPUtil.getIpAddr(request);
         loginLog.setIp(ip);
         loginLog.setLocation(AddressUtil.getCityInfo(ip));

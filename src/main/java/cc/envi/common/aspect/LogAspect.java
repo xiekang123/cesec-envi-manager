@@ -1,11 +1,11 @@
-package cc.mrbird.febs.common.aspect;
+package cc.envi.common.aspect;
 
-import cc.mrbird.febs.common.properties.FebsProperties;
-import cc.mrbird.febs.common.utils.HttpContextUtil;
-import cc.mrbird.febs.common.utils.IPUtil;
-import cc.mrbird.febs.monitor.entity.Log;
-import cc.mrbird.febs.monitor.service.ILogService;
-import cc.mrbird.febs.system.entity.User;
+import cc.envi.common.properties.FebsProperties;
+import cc.envi.common.utils.HttpContextUtils;
+import cc.envi.common.utils.IPUtil;
+import cc.envi.system.entity.Log;
+import cc.envi.system.entity.User;
+import cc.envi.system.service.ILogService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -33,7 +33,7 @@ public class LogAspect {
     @Autowired
     private ILogService logService;
 
-    @Pointcut("@annotation(cc.mrbird.febs.common.annotation.Log)")
+    @Pointcut("@annotation(cc.envi.common.annotation.Log)")
     public void pointcut() {
         // do nothing
     }
@@ -44,7 +44,7 @@ public class LogAspect {
         long beginTime = System.currentTimeMillis();
         // 执行方法
         result = point.proceed();
-        HttpServletRequest request = HttpContextUtil.getHttpServletRequest();
+        HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
         // 设置 IP地址
         String ip = IPUtil.getIpAddr(request);
         // 执行时长(毫秒)

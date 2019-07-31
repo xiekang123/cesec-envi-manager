@@ -1,8 +1,9 @@
-package cc.mrbird.febs.system.service.impl;
+package cc.envi.system.service.impl;
 
-import cc.mrbird.febs.system.entity.RoleMenu;
-import cc.mrbird.febs.system.mapper.RoleMenuMapper;
-import cc.mrbird.febs.system.service.IRoleMenuService;
+
+import cc.envi.system.entity.RoleMenu;
+import cc.envi.system.mapper.RoleMenuMapper;
+import cc.envi.system.service.IRoleMenuService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;

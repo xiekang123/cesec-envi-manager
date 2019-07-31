@@ -1,4 +1,4 @@
-package cc.mrbird.febs.common.exception;
+package cc.envi.common.exception;
 
 /**
  * FEBS系统内部异常

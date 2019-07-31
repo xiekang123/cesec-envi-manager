@@ -1,13 +1,13 @@
-package cc.mrbird.febs.monitor.service.impl;
+package cc.envi.system.service.impl;
 
 
-import cc.mrbird.febs.common.entity.FebsConstant;
-import cc.mrbird.febs.common.entity.QueryRequest;
-import cc.mrbird.febs.common.utils.AddressUtil;
-import cc.mrbird.febs.common.utils.SortUtil;
-import cc.mrbird.febs.monitor.entity.Log;
-import cc.mrbird.febs.monitor.mapper.LogMapper;
-import cc.mrbird.febs.monitor.service.ILogService;
+import cc.envi.common.domain.QueryRequest;
+import cc.envi.common.utils.AddressUtil;
+import cc.envi.common.utils.FebsConstant;
+import cc.envi.common.utils.SortUtil;
+import cc.envi.system.entity.Log;
+import cc.envi.system.mapper.LogMapper;
+import cc.envi.system.service.ILogService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -74,7 +74,7 @@ public class LogServiceImpl extends ServiceImpl<LogMapper, Log> implements ILogS
     public void saveLog(ProceedingJoinPoint point, Log log) throws JsonProcessingException {
         MethodSignature signature = (MethodSignature) point.getSignature();
         Method method = signature.getMethod();
-        cc.mrbird.febs.common.annotation.Log logAnnotation = method.getAnnotation(cc.mrbird.febs.common.annotation.Log.class);
+        cc.envi.common.annotation.Log logAnnotation = method.getAnnotation(cc.envi.common.annotation.Log.class);
         if (logAnnotation != null) {
             // 注解上的描述
             log.setOperation(logAnnotation.value());

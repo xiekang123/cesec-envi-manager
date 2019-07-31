@@ -1,8 +1,6 @@
-package cc.mrbird.febs.common.utils;
+package cc.envi.common.utils;
 
-import cc.mrbird.febs.common.entity.FebsConstant;
-import cc.mrbird.febs.common.exception.RedisConnectException;
-import cc.mrbird.febs.monitor.service.IRedisService;
+import cc.envi.common.service.RedisService;
 import com.wf.captcha.Captcha;
 import com.wf.captcha.GifCaptcha;
 import com.wf.captcha.SpecCaptcha;
@@ -16,7 +14,7 @@ import java.awt.*;
 import java.io.IOException;
 
 /**
- * 验证码工具类，重写 {@link com.wf.captcha.utils.CaptchaUtil}
+ * 验证码工具类，重写
  * 因为它没有提供修改验证码类型方法
  *
  * @author MrBird
@@ -24,7 +22,7 @@ import java.io.IOException;
 @Slf4j
 public class CaptchaUtil {
 
-    private static IRedisService redisService = SpringContextUtil.getBean(IRedisService.class);
+    private static RedisService redisService = SpringContextUtil.getBean(RedisService.class);
 
     // gif 类型验证码
     private static final int GIF_TYPE = 1;
@@ -82,11 +80,8 @@ public class CaptchaUtil {
         HttpSession session = request.getSession();
         String key = FebsConstant.CODE_PREFIX + session.getId();
         String sessionCode = "";
-        try {
-            sessionCode = redisService.get(key);
-        } catch (RedisConnectException e) {
-            log.error("获取验证码异常", e);
-        }
+        sessionCode = (String)redisService.get(key);
+
         return StringUtils.equalsIgnoreCase(code, sessionCode);
     }
 
@@ -107,12 +102,7 @@ public class CaptchaUtil {
         HttpSession session = request.getSession();
         String code = captcha.text().toLowerCase();
         String key = FebsConstant.CODE_PREFIX + session.getId();
-
-        try {
-            redisService.set(key, code, 120000L);
-        } catch (RedisConnectException e) {
-            log.error("保存验证码异常", e);
-        }
+        redisService.set(key, code, 120000L);
 
         captcha.out(response.getOutputStream());
     }

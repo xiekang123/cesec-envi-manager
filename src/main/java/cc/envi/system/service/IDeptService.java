@@ -1,8 +1,9 @@
-package cc.mrbird.febs.system.service;
+package cc.envi.system.service;
 
-import cc.mrbird.febs.common.entity.DeptTree;
-import cc.mrbird.febs.common.entity.QueryRequest;
-import cc.mrbird.febs.system.entity.Dept;
+
+import cc.envi.common.domain.QueryRequest;
+import cc.envi.common.entity.DeptTree;
+import cc.envi.system.entity.Dept;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;

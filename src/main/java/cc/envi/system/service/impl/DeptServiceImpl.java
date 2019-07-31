@@ -1,13 +1,13 @@
-package cc.mrbird.febs.system.service.impl;
+package cc.envi.system.service.impl;
 
-import cc.mrbird.febs.common.entity.DeptTree;
-import cc.mrbird.febs.common.entity.FebsConstant;
-import cc.mrbird.febs.common.entity.QueryRequest;
-import cc.mrbird.febs.common.utils.SortUtil;
-import cc.mrbird.febs.common.utils.TreeUtil;
-import cc.mrbird.febs.system.entity.Dept;
-import cc.mrbird.febs.system.mapper.DeptMapper;
-import cc.mrbird.febs.system.service.IDeptService;
+import cc.envi.common.domain.QueryRequest;
+import cc.envi.common.entity.DeptTree;
+import cc.envi.common.utils.FebsConstant;
+import cc.envi.common.utils.SortUtil;
+import cc.envi.common.utils.TreeUtil;
+import cc.envi.system.entity.Dept;
+import cc.envi.system.mapper.DeptMapper;
+import cc.envi.system.service.IDeptService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.commons.lang3.StringUtils;

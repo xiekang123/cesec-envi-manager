@@ -1,16 +1,17 @@
-package cc.mrbird.febs.system.service.impl;
+package cc.envi.system.service.impl;
 
-import cc.mrbird.febs.common.authentication.ShiroRealm;
-import cc.mrbird.febs.common.entity.FebsConstant;
-import cc.mrbird.febs.common.entity.QueryRequest;
-import cc.mrbird.febs.common.utils.FebsUtil;
-import cc.mrbird.febs.common.utils.MD5Util;
-import cc.mrbird.febs.common.utils.SortUtil;
-import cc.mrbird.febs.system.entity.User;
-import cc.mrbird.febs.system.entity.UserRole;
-import cc.mrbird.febs.system.mapper.UserMapper;
-import cc.mrbird.febs.system.service.IUserRoleService;
-import cc.mrbird.febs.system.service.IUserService;
+
+import cc.envi.common.authentication.ShiroRealm;
+import cc.envi.common.domain.QueryRequest;
+import cc.envi.common.utils.FebsConstant;
+import cc.envi.common.utils.FebsUtil;
+import cc.envi.common.utils.MD5Util;
+import cc.envi.common.utils.SortUtil;
+import cc.envi.system.entity.User;
+import cc.envi.system.entity.UserRole;
+import cc.envi.system.mapper.UserMapper;
+import cc.envi.system.service.IUserRoleService;
+import cc.envi.system.service.IUserService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;

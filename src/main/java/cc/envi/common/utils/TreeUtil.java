@@ -1,8 +1,8 @@
-package cc.mrbird.febs.common.utils;
+package cc.envi.common.utils;
 
 
-import cc.mrbird.febs.common.entity.DeptTree;
-import cc.mrbird.febs.common.entity.MenuTree;
+import cc.envi.common.entity.DeptTree;
+import cc.envi.common.entity.MenuTree;
 
 import java.util.ArrayList;
 import java.util.HashMap;

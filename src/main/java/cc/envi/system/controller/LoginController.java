@@ -1,15 +1,13 @@
-package cc.mrbird.febs.system.controller;
+package cc.envi.system.controller;
 
-import cc.mrbird.febs.common.annotation.Limit;
-import cc.mrbird.febs.common.controller.BaseController;
-import cc.mrbird.febs.common.entity.FebsResponse;
-import cc.mrbird.febs.common.exception.FebsException;
-import cc.mrbird.febs.common.utils.CaptchaUtil;
-import cc.mrbird.febs.common.utils.MD5Util;
-import cc.mrbird.febs.monitor.entity.LoginLog;
-import cc.mrbird.febs.monitor.service.ILoginLogService;
-import cc.mrbird.febs.system.entity.User;
-import cc.mrbird.febs.system.service.IUserService;
+import cc.envi.common.annotation.Limit;
+import cc.envi.common.controller.BaseController;
+import cc.envi.common.entity.FebsResponse;
+import cc.envi.common.exception.FebsException;
+import cc.envi.common.utils.CaptchaUtil;
+import cc.envi.common.utils.MD5Util;
+import cc.envi.system.entity.User;
+import cc.envi.system.service.IUserService;
 import com.wf.captcha.Captcha;
 import org.apache.shiro.authc.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,8 +34,6 @@ public class LoginController extends BaseController {
 
     @Autowired
     private IUserService userService;
-    @Autowired
-    private ILoginLogService loginLogService;
 
     @PostMapping("login")
     @Limit(key = "login", period = 60, count = 20, name = "登录接口", prefix = "limit")
@@ -52,12 +49,6 @@ public class LoginController extends BaseController {
         UsernamePasswordToken token = new UsernamePasswordToken(username, password, rememberMe);
         try {
             super.login(token);
-            // 保存登录日志
-            LoginLog loginLog = new LoginLog();
-            loginLog.setUsername(username);
-            loginLog.setSystemBrowserInfo();
-            this.loginLogService.saveLoginLog(loginLog);
-
             return new FebsResponse().success();
         } catch (UnknownAccountException | IncorrectCredentialsException | LockedAccountException e) {
             throw new FebsException(e.getMessage());
@@ -84,18 +75,18 @@ public class LoginController extends BaseController {
         this.userService.updateLoginTime(username);
         Map<String, Object> data = new HashMap<>();
         // 获取系统访问记录
-        Long totalVisitCount = this.loginLogService.findTotalVisitCount();
+        Long totalVisitCount = 0L;
         data.put("totalVisitCount", totalVisitCount);
-        Long todayVisitCount = this.loginLogService.findTodayVisitCount();
+        Long todayVisitCount = 0L;
         data.put("todayVisitCount", todayVisitCount);
-        Long todayIp = this.loginLogService.findTodayIp();
+        Long todayIp = 0L;
         data.put("todayIp", todayIp);
         // 获取近期系统访问记录
-        List<Map<String, Object>> lastSevenVisitCount = this.loginLogService.findLastSevenDaysVisitCount(null);
+        List<Map<String, Object>> lastSevenVisitCount = new ArrayList<>();
         data.put("lastSevenVisitCount", lastSevenVisitCount);
         User param = new User();
         param.setUsername(username);
-        List<Map<String, Object>> lastSevenUserVisitCount = this.loginLogService.findLastSevenDaysVisitCount(param);
+        List<Map<String, Object>> lastSevenUserVisitCount = new ArrayList<>();
         data.put("lastSevenUserVisitCount", lastSevenUserVisitCount);
         return new FebsResponse().success().data(data);
     }

@@ -1,15 +1,15 @@
-package cc.mrbird.febs.system.service.impl;
+package cc.envi.system.service.impl;
 
-import cc.mrbird.febs.common.authentication.ShiroRealm;
-import cc.mrbird.febs.common.entity.FebsConstant;
-import cc.mrbird.febs.common.entity.QueryRequest;
-import cc.mrbird.febs.common.utils.SortUtil;
-import cc.mrbird.febs.system.entity.Role;
-import cc.mrbird.febs.system.entity.RoleMenu;
-import cc.mrbird.febs.system.mapper.RoleMapper;
-import cc.mrbird.febs.system.service.IRoleMenuService;
-import cc.mrbird.febs.system.service.IRoleService;
-import cc.mrbird.febs.system.service.IUserRoleService;
+import cc.envi.common.authentication.ShiroRealm;
+import cc.envi.common.domain.QueryRequest;
+import cc.envi.common.utils.FebsConstant;
+import cc.envi.common.utils.SortUtil;
+import cc.envi.system.entity.Role;
+import cc.envi.system.entity.RoleMenu;
+import cc.envi.system.mapper.RoleMapper;
+import cc.envi.system.service.IRoleMenuService;
+import cc.envi.system.service.IRoleService;
+import cc.envi.system.service.IUserRoleService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;

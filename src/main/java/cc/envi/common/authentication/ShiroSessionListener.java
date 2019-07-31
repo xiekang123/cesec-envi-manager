@@ -1,4 +1,4 @@
-package cc.mrbird.febs.common.authentication;
+package cc.envi.common.authentication;
 
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.SessionListener;
@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * @author MrBird
  */
-public class ShiroSessionListener implements SessionListener{
+public class ShiroSessionListener implements SessionListener {
 
 	private final AtomicInteger sessionCount = new AtomicInteger(0);
 	

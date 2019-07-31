@@ -1,11 +1,11 @@
-package cc.mrbird.febs.common.authentication;
+package cc.envi.common.authentication;
 
-import cc.mrbird.febs.system.entity.Menu;
-import cc.mrbird.febs.system.entity.Role;
-import cc.mrbird.febs.system.entity.User;
-import cc.mrbird.febs.system.service.IMenuService;
-import cc.mrbird.febs.system.service.IRoleService;
-import cc.mrbird.febs.system.service.IUserService;
+import cc.envi.system.entity.Menu;
+import cc.envi.system.entity.Role;
+import cc.envi.system.entity.User;
+import cc.envi.system.service.IMenuService;
+import cc.envi.system.service.IRoleService;
+import cc.envi.system.service.IUserService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;

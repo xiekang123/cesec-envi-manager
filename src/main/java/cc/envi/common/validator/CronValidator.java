@@ -1,6 +1,6 @@
-package cc.mrbird.febs.common.validator;
+package cc.envi.common.validator;
 
-import cc.mrbird.febs.common.annotation.IsCron;
+import cc.envi.common.annotation.IsCron;
 import org.quartz.CronExpression;
 
 import javax.validation.ConstraintValidator;

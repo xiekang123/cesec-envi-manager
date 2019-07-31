@@ -1,4 +1,4 @@
-package cc.mrbird.febs.common.utils;
+package cc.envi.common.utils;
 
 import org.apache.commons.io.FileUtils;
 import org.lionsoul.ip2region.DataBlock;

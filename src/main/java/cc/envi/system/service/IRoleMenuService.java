@@ -1,6 +1,6 @@
-package cc.mrbird.febs.system.service;
+package cc.envi.system.service;
 
-import cc.mrbird.febs.system.entity.RoleMenu;
+import cc.envi.system.entity.RoleMenu;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;

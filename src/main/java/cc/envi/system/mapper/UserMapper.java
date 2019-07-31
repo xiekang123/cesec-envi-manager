@@ -1,16 +1,18 @@
-package cc.mrbird.febs.system.mapper;
+package cc.envi.system.mapper;
 
-import cc.mrbird.febs.system.entity.User;
+import cc.envi.system.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * @author MrBird
  */
+@Repository
 public interface UserMapper extends BaseMapper<User> {
 
     /**

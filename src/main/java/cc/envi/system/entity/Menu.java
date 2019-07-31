@@ -1,6 +1,6 @@
-package cc.mrbird.febs.system.entity;
+package cc.envi.system.entity;
 
-import cc.mrbird.febs.common.converter.TimeConverter;
+import cc.envi.common.converter.TimeConverter;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -18,7 +18,7 @@ import java.util.Date;
  * @author MrBird
  */
 @Data
-@TableName("t_menu")
+@TableName("sys_menu")
 @Excel("菜单信息表")
 public class Menu implements Serializable {
 

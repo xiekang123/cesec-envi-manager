@@ -1,4 +1,4 @@
-package cc.mrbird.febs.common.properties;
+package cc.envi.common.properties;
 
 import lombok.Data;
 

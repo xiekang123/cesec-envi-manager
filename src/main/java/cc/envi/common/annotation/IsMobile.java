@@ -1,6 +1,7 @@
-package cc.mrbird.febs.common.annotation;
+package cc.envi.common.annotation;
 
-import cc.mrbird.febs.common.validator.MobileValidator;
+
+import cc.envi.common.validator.MobileValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

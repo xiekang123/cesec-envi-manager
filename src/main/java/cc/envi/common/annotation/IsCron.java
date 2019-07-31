@@ -1,6 +1,7 @@
-package cc.mrbird.febs.common.annotation;
+package cc.envi.common.annotation;
 
-import cc.mrbird.febs.common.validator.CronValidator;
+
+import cc.envi.common.validator.CronValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

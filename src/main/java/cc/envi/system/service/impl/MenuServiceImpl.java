@@ -1,12 +1,12 @@
-package cc.mrbird.febs.system.service.impl;
+package cc.envi.system.service.impl;
 
-import cc.mrbird.febs.common.authentication.ShiroRealm;
-import cc.mrbird.febs.common.entity.MenuTree;
-import cc.mrbird.febs.common.utils.TreeUtil;
-import cc.mrbird.febs.system.entity.Menu;
-import cc.mrbird.febs.system.mapper.MenuMapper;
-import cc.mrbird.febs.system.mapper.RoleMenuMapper;
-import cc.mrbird.febs.system.service.IMenuService;
+import cc.envi.common.authentication.ShiroRealm;
+import cc.envi.common.entity.MenuTree;
+import cc.envi.common.utils.TreeUtil;
+import cc.envi.system.entity.Menu;
+import cc.envi.system.mapper.MenuMapper;
+import cc.envi.system.mapper.RoleMenuMapper;
+import cc.envi.system.service.IMenuService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
