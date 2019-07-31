@@ -1,18 +1,26 @@
-package cc.envi.common.controller;
+package cc.mrbird.febs.common.controller;
 
-import cc.envi.system.entity.UserEntity;
+import cc.mrbird.febs.system.entity.User;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * @author MrBird
+ */
 public class BaseController {
+
     protected static Subject getSubject() {
         return SecurityUtils.getSubject();
     }
 
-    protected UserEntity getCurrentUser() {
-        return (UserEntity) getSubject().getPrincipal();
+    protected User getCurrentUser() {
+        return (User) getSubject().getPrincipal();
     }
 
     protected Session getSession() {
@@ -26,4 +34,12 @@ public class BaseController {
     protected void login(AuthenticationToken token) {
         getSubject().login(token);
     }
+
+    protected Map<String, Object> getDataTable(IPage<?> pageInfo) {
+        Map<String, Object> data = new HashMap<>();
+        data.put("rows", pageInfo.getRecords());
+        data.put("total", pageInfo.getTotal());
+        return data;
+    }
+
 }
