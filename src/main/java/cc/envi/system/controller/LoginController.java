@@ -7,6 +7,7 @@ import cc.envi.common.exception.FebsException;
 import cc.envi.common.utils.CaptchaUtil;
 import cc.envi.common.utils.MD5Util;
 import cc.envi.system.entity.User;
+import cc.envi.system.service.ILoginLogService;
 import cc.envi.system.service.IUserService;
 import com.wf.captcha.Captcha;
 import org.apache.shiro.authc.*;
@@ -34,6 +35,8 @@ public class LoginController extends BaseController {
 
     @Autowired
     private IUserService userService;
+    @Autowired
+    private ILoginLogService loginLogService;
 
     @PostMapping("login")
     @Limit(key = "login", period = 60, count = 20, name = "登录接口", prefix = "limit")
@@ -75,18 +78,18 @@ public class LoginController extends BaseController {
         this.userService.updateLoginTime(username);
         Map<String, Object> data = new HashMap<>();
         // 获取系统访问记录
-        Long totalVisitCount = 0L;
+        Long totalVisitCount = this.loginLogService.findTotalVisitCount();
         data.put("totalVisitCount", totalVisitCount);
-        Long todayVisitCount = 0L;
+        Long todayVisitCount = this.loginLogService.findTodayVisitCount();
         data.put("todayVisitCount", todayVisitCount);
-        Long todayIp = 0L;
+        Long todayIp = this.loginLogService.findTodayIp();
         data.put("todayIp", todayIp);
         // 获取近期系统访问记录
-        List<Map<String, Object>> lastSevenVisitCount = new ArrayList<>();
+        List<Map<String, Object>> lastSevenVisitCount = this.loginLogService.findLastSevenDaysVisitCount(null);
         data.put("lastSevenVisitCount", lastSevenVisitCount);
         User param = new User();
         param.setUsername(username);
-        List<Map<String, Object>> lastSevenUserVisitCount = new ArrayList<>();
+        List<Map<String, Object>> lastSevenUserVisitCount = this.loginLogService.findLastSevenDaysVisitCount(param);
         data.put("lastSevenUserVisitCount", lastSevenUserVisitCount);
         return new FebsResponse().success().data(data);
     }
