@@ -70,14 +70,17 @@
                 <ul class="layui-nav layui-nav-tree" lay-filter="febs-sidebar" lay-shrink="all">
                     {{#
                     function __createSlidebar(data,index){
-                    if(!data || data.length == 0) return '';
-                    var html = '
-                    <dl class="layui-nav-child">';
+                        var arr = ['demo','b','c'];
+                        if(!data || data.length == 0) return '';
+                        var html = '<dl class="layui-nav-child">';
                         layui.each(data,function(i,child){
-                        var left = index == 0 ? 50 : 50 + index * 20;
-                        html += '
-                        <dd><a style="padding-left:' + left + 'px" target="'+(child.target||'')+'"
-                               lay-href="'+ (child.href||'') +'">' + child.title + '</a>';
+                            var left = index == 0 ? 50 : 50 + index * 20;
+                            html += '<dd><a style="padding-left:' + left + 'px" target="'+(child.target||'');
+                            if(arr.indexOf(child.href)>=0){
+                                html += '" onclick=openDemo(\"'+ child.href +'\")>' + child.title + '</a>';
+                            }else{
+                                html +='"lay-href="'+ (child.href||'') +'">' + child.title + '</a>';
+                            }
                             if(child.childs) html += __createSlidebar(child.childs,index+1);
                             html += '</dd>';
                         });
@@ -101,6 +104,11 @@
     <div class="layui-body" id="febs-body"></div>
 </div>
 <script data-th-inline="javascript" type="text/javascript">
+
+    function openDemo(name) {
+        window.open(ctx + name,'demo')
+    }
+
     layui.use(['jquery', 'febs', 'element'], function () {
         var $ = layui.jquery,
             $view = $('#febs-layout'),
@@ -115,6 +123,8 @@
         $view.on('click', '.layui-logo', function () {
             febs.navigate("/index");
         });
+
+
 
         $view.on('click', '#password-update', function () {
             febs.modal.view('密码修改', 'password/update', {
